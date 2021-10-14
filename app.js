@@ -13,3 +13,24 @@ function getRandomPhraseAsArray(arr) {
     randomPhraseCharacters = randomPhrase.split('');
     return randomPhraseCharacters;
 }
+
+function addPhraseToDisplay(arr) {
+    const phraseDisplay = phrase.firstElementChild;
+    for (let i = 0; i < arr.length; i++) {
+        displayItem = document.createElement('li');
+        displayItem.textContent = arr[i];
+        if (arr[i] === ' ') {
+            phraseDisplay.appendChild(displayItem);
+        } else {
+            displayItem.className = 'letter';
+            phraseDisplay.appendChild(displayItem);
+        }
+    }
+}
+
+function checkLetter(buttonPressed) {
+    
+}
+
+const phraseArray = getRandomPhraseAsArray(phrases);
+addPhraseToDisplay(phraseArray);
