@@ -22,7 +22,7 @@ function addPhraseToDisplay(arr) {
         if (arr[i] === ' ') {
             phraseDisplay.appendChild(displayItem);
         } else {
-            displayItem.className = 'letter';
+            displayItem.className += ' letter';
             phraseDisplay.appendChild(displayItem);
         }
     }
@@ -35,7 +35,7 @@ function checkLetter(buttonPressed) {
     for (let i = 0; i < lettersInPhrase.length; i++) {
         const letter = lettersInPhrase[i];
         if (buttonPressed === letter.textContent) {
-            letter.className = 'show';
+            letter.className += ' show';
             matchingLetter = letter.textContent;
             matchingLetters++;
         }
@@ -49,3 +49,12 @@ function checkLetter(buttonPressed) {
 
 const phraseArray = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(phraseArray);
+
+qwerty.addEventListener('click', (e) => {
+    const buttonPressed = e.target;
+    if (buttonPressed.tagName === 'BUTTON') {
+        buttonPressed.className += ' chosen';
+        buttonPressed.disabled = true;
+        letterFound = checkLetter(buttonPressed.textContent);
+    }
+});
