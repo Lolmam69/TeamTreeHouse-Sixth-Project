@@ -29,7 +29,22 @@ function addPhraseToDisplay(arr) {
 }
 
 function checkLetter(buttonPressed) {
-    
+    const lettersInPhrase = document.getElementsByClassName('letter');
+    let matchingLetter = '';
+    let matchingLetters = 0;
+    for (let i = 0; i < lettersInPhrase.length; i++) {
+        const letter = lettersInPhrase[i];
+        if (buttonPressed === letter.textContent) {
+            letter.className = 'show';
+            matchingLetter = letter.textContent;
+            matchingLetters++;
+        }
+    }
+    if (matchingLetters > 0) {
+        return matchingLetter;
+    } else {
+        return null;
+    }
 }
 
 const phraseArray = getRandomPhraseAsArray(phrases);
