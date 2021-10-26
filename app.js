@@ -47,6 +47,24 @@ function checkLetter(buttonPressed) {
     }
 }
 
+function checkWin() {
+    const letterCount = document.getElementsByClassName('letter');
+    const shownLetterCount = document.getElementsByClassName('show');
+    const overlay = document.getElementById('overlay');
+    const title = overlay.firstElementChild;
+    if (letterCount.length === shownLetterCount.length) {
+        overlay.className = 'win';
+        overlay.style.display = '';
+        title.textContent = 'you win';
+        startGameButton.style.display = 'none';
+    } else if (missed >= 5) {
+        overlay.className = 'lose';
+        overlay.style.display = '';
+        title.textContent = 'you lose';
+        startGameButton.style.display = 'none';
+    }
+}
+
 const phraseArray = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(phraseArray);
 
@@ -63,5 +81,6 @@ qwerty.addEventListener('click', (e) => {
             missed += 1;
             console.log(heart);
         }
+        checkWin();
     }
 });
