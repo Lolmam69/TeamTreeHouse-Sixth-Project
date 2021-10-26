@@ -79,7 +79,6 @@ qwerty.addEventListener('click', (e) => {
             const heart = hearts[missed];
             heart.src = 'images/lostHeart.png';
             missed += 1;
-            console.log(heart);
         }
         checkWin();
     }
