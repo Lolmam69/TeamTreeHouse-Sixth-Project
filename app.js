@@ -21,6 +21,7 @@ function addPhraseToDisplay(arr) {
         displayItem = document.createElement('li');
         displayItem.textContent = arr[i];
         if (arr[i] === ' ') {
+            displayItem.className += ' space';
             phraseDisplay.appendChild(displayItem);
         } else {
             displayItem.className += ' letter';
