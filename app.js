@@ -6,6 +6,7 @@ let missed = 0;
 const startGameButton = document.querySelector('a.btn__reset');
 startGameButton.addEventListener('click', () => {
     startGameButton.parentNode.style.display = 'none';
+    gameReset();
 });
 
 function getRandomPhraseAsArray(arr) {
@@ -26,6 +27,11 @@ function addPhraseToDisplay(arr) {
             phraseDisplay.appendChild(displayItem);
         }
     }
+}
+
+function removePhraseFromDisplay() {
+    const phraseDisplay = phrase.firstElementChild;
+    phraseDisplay.innerHTML = '';
 }
 
 function checkLetter(buttonPressed) {
@@ -56,17 +62,34 @@ function checkWin() {
         overlay.className = 'win';
         overlay.style.display = '';
         title.textContent = 'you win';
-        startGameButton.style.display = 'none';
+        startGameButton.textContent = 'New Game';
     } else if (missed >= 5) {
         overlay.className = 'lose';
         overlay.style.display = '';
         title.textContent = 'you lose';
-        startGameButton.style.display = 'none';
+        startGameButton.textContent = 'Try Again';
     }
 }
 
-const phraseArray = getRandomPhraseAsArray(phrases);
-addPhraseToDisplay(phraseArray);
+function gameReset() {
+    const phraseArray = getRandomPhraseAsArray(phrases);
+    if (startGameButton.textContent === 'Start Game') {
+        addPhraseToDisplay(phraseArray);
+    } else {
+        const clickedButtons = document.querySelectorAll('.chosen');
+        const hearts = document.querySelectorAll('.tries img')
+        for (let i = 0; i < clickedButtons.length; i++) {
+            clickedButtons[i].className = '';
+            clickedButtons[i].disabled = false;
+        }
+        for (let i = 0; i < hearts.length; i++) {
+            hearts[i].src = 'images/liveHeart.png';
+        }
+        missed = 0;
+        removePhraseFromDisplay();
+        addPhraseToDisplay(phraseArray);
+    }
+}
 
 qwerty.addEventListener('click', (e) => {
     const buttonPressed = e.target;
