@@ -56,5 +56,12 @@ qwerty.addEventListener('click', (e) => {
         buttonPressed.className += ' chosen';
         buttonPressed.disabled = true;
         letterFound = checkLetter(buttonPressed.textContent);
+        if (!letterFound) {
+            const hearts = document.querySelectorAll('.tries img');
+            const heart = hearts[missed];
+            heart.src = 'images/lostHeart.png';
+            missed += 1;
+            console.log(heart);
+        }
     }
 });
